@@ -2,7 +2,7 @@
 
 import requests
 import json
-import datetime
+from datetime import date
 import time
 import os
 import gzip
@@ -66,7 +66,7 @@ uk_cities = [
 ]
 
 last_city = 0
-date = datetime.datetime.now()
+date = str(date.today())
 
 
 class Zoopla_listings:
@@ -94,7 +94,7 @@ class Zoopla_listings:
                 content_rental = rentals.content
                 content_rental = json.loads(content_rental)
                 #with open('/home/luqui/Sale_downloader/'+ str(date.year) + str(date.month) + str(date.day)+'/'+str(self.city_name) + ' ' + 'page' + ' ' + str(self.page_number) +' '+ str(self.date.month) + '-' + str(self.date.day) + '-' + str(self.date.year) + ' ' + str(self.date.hour) + str(self.date.minute) , 'w') as f:
-                with gzip.GzipFile('/home/luqui/Sale_downloader/'+ str(date.year) + str(date.month) + str(date.day)+'/'+str(self.city_name) + ' ' + 'page' + ' ' + str(self.page_number) +' '+ str(self.date.month) + '-' + str(self.date.day) + '-' + str(self.date.year) + ' ' + str(self.date.hour) + str(self.date.minute) + ".gz" , 'w') as f:
+                with gzip.GzipFile('/home/luqui/Sale_downloader/'+ date +'/'+str(self.city_name) + ' ' + 'page' + ' ' + str(self.page_number) +' '+ str(self.date.month) + '-' + str(self.date.day) + '-' + str(self.date.year) + ' ' + str(self.date.hour) + str(self.date.minute) + ".gz" , 'w') as f:
                     json_str = json.dumps(content_rental) + "\n"
                     json_bytes = json_str.encode('utf-8')
                     f.write(json_bytes)
@@ -124,7 +124,7 @@ class Zoopla_listings:
 
 def last_created(string):
     global last_city
-    list_of_files = os.listdir('/home/luqui/Sale_downloader/' + str(date.year) + str(date.month) + str(date.day))
+    list_of_files = os.listdir('/home/luqui/Sale_downloader/' + date)
     # list_of_files = os.listdir('/home/luqui/Rent_downloader')
     try:
         latest_file = max(list_of_files, key=os.path.getctime)
@@ -139,15 +139,13 @@ def last_created(string):
 
 
 
-
-
 if __name__ == '__main__':
 
-    if os.path.exists('/home/luqui/Sale_downloader/'+ str(date.year) + str(date.month) + str(date.day)):
-        os.chdir('/home/luqui/Sale_downloader/'+ str(date.year) + str(date.month) + str(date.day))
+    if os.path.exists('/home/luqui/Sale_downloader/'+ date):
+        os.chdir('/home/luqui/Sale_downloader/'+ date)
     else:
-        os.mkdir('/home/luqui/Sale_downloader/' + str(date.year) + str(date.month) + str(date.day))
-        os.chdir('/home/luqui/Sale_downloader/' + str(date.year) + str(date.month) + str(date.day))
+        os.mkdir('/home/luqui/Sale_downloader/' + date)
+        os.chdir('/home/luqui/Sale_downloader/' + date)
 
 
     for city in uk_cities:
