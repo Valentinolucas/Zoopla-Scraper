@@ -94,7 +94,7 @@ class Zoopla_listings:
                 content_rental = rentals.content
                 content_rental = json.loads(content_rental)
                 #with open('/home/luqui/Sale_downloader/'+ str(date.year) + str(date.month) + str(date.day)+'/'+str(self.city_name) + ' ' + 'page' + ' ' + str(self.page_number) +' '+ str(self.date.month) + '-' + str(self.date.day) + '-' + str(self.date.year) + ' ' + str(self.date.hour) + str(self.date.minute) , 'w') as f:
-                with gzip.GzipFile('/home/luqui/Sale_downloader/'+ str(date) +'/'+str(self.city_name) + ' ' + 'page' + ' ' + str(self.page_number) +' '+ str(self.date.month) + '-' + str(self.date.day) + '-' + str(self.date.year) + ' ' + str(self.date.hour) + str(self.date.minute) + ".gz" , 'w') as f:
+                with gzip.GzipFile('/home/luqui/Sale_downloader/'+ str(date) +'/'+str(self.city_name) + ' ' + 'page' + ' ' + str(self.page_number) +' '+ str(self.date.month) + '-' + str(self.date.day) + '-' + str(self.date.year)  + ".gz" , 'w') as f:
                     json_str = json.dumps(content_rental) + "\n"
                     json_bytes = json_str.encode('utf-8')
                     f.write(json_bytes)
