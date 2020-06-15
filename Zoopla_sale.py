@@ -66,7 +66,7 @@ uk_cities = [
 ]
 
 last_city = 0
-date = str(date.today())
+date = date.today()
 
 
 class Zoopla_listings:
@@ -76,7 +76,7 @@ class Zoopla_listings:
 
     def __init__(self,city_name,page_number=1):
         self.city_name = city_name
-        self.date = datetime.datetime.now()
+        self.date = date.today()
         self.count = 0
         self.page_number = page_number
         self.listing_qty = 1
